@@ -1,0 +1,43 @@
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "my_stopwords": {
+          "type": "stop",
+          "stopwords": ["vuile", "fuck", "damn"],
+          "ignore_case": true
+        },
+        "dirty_words_filter": {
+          "type": "stop",
+          "stopwords": ["dirtyWord1", "dirtyWord2"],
+          "ignore_case": true
+        }
+      },
+      "analyzer": {
+        "custom_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "my_stopwords",
+            "dirty_words_filter"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "UserId": {
+        "type": "integer"},
+      "Name": {
+        "type": "text",
+        "analyzer": "custom_analyzer"
+      },
+      "Message": {
+        "type": "text",
+        "analyzer": "custom_analyzer"
+      }
+    }
+  }
+}
